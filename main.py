@@ -3,7 +3,7 @@ from telebot import types
 import random
 import json
 import os
-bot=telebot.TeleBot("YOUR_BOT_TOKEN_HERE")
+bot=telebot.TeleBot(os.environ.get("BOT_TOKEN"))
 bad_words=["чит","спам","купи","задонать","подари","дай","67"]
 DB_FILE="warnings_db.json"
 def load_warnings():
