@@ -3,6 +3,15 @@ from telebot import types
 import random
 import json
 import os
+import threading
+import http.server
+import socketserver
+def run_web_server():
+    port = int(os.environ.get("PORT", 8080))
+    handler = http.server.SimpleHTTPRequestHandler
+    with socketserver.TCPServer(("", port), handler) as httpd:
+        httpd.serve_forever()
+        threading.Thread(target=run_web_server, daemon=True).start()
 bot=telebot.TeleBot(os.environ.get("BOT_TOKEN"))
 bad_words=["чит","спам","купи","задонать","подари","дай","67"]
 DB_FILE="warnings_db.json"
